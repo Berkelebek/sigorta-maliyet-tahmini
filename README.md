@@ -22,15 +22,24 @@ Bu projede asıl dikkat ettiğim şey, modelin skorlarının gerçekten güvenil
 
 ## Overfitting var mı?
 
-Metriklere bakmadan önce her modelin eğitim, çapraz doğrulama ve test R² değerlerini yan yana koydum. Eğitim ile doğrulama arasındaki fark 0,10'u geçerse modeli "overfit" sayıyorum.
+Metriklere bakmadan önce her modelin eğitim, çapraz doğrulama (CV) ve test R² değerlerini yan yana koydum. Overfitting'i iki farkla ölçüyorum:
 
-| Model | Eğitim R² | CV R² | Test R² | Fark | Durum |
-|---|---|---|---|---|---|
-| ElasticNet | 0,805 | 0,797 | 0,852 | 0,008 | Normal |
-| **RandomForest** | 0,872 | 0,849 | 0,883 | 0,023 | Normal |
-| XGBoost | 0,872 | 0,845 | 0,883 | 0,027 | Normal |
+- **Eğitim - Test farkı:** Modelin eğitim verisindeki puanı ile hiç görmediği test verisindeki puanı arasındaki fark.
+- **Eğitim - CV farkı:** Aynı kıyas, ama eğitim verisinin içinden ayrılan deneme parçalarıyla.
 
-Ayar yapmadan önce RandomForest'ın farkı yaklaşık 0,12, XGBoost'un yaklaşık 0,20 çıkmıştı; yani ikisi eğitim verisini ezberliyordu. Ayardan sonra bu fark 0,02-0,03'e düştü.
+İki farktan biri 0,10'u geçerse modeli "overfit" sayıyorum.
+
+| Model | Eğitim R² | CV R² | Test R² | Eğitim - Test farkı | Eğitim - CV farkı | Durum |
+|---|---|---|---|---|---|---|
+| ElasticNet | 0,805 | 0,797 | 0,852 | -0,047 | 0,008 | Normal |
+| **RandomForest** | 0,872 | 0,849 | 0,883 | -0,011 | 0,023 | Normal |
+| XGBoost | 0,872 | 0,845 | 0,883 | -0,011 | 0,027 | Normal |
+
+Eksi işareti, modelin test verisinde eğitim verisinden bile biraz daha iyi puan aldığı anlamına gelir; yani ezber yok. Test seti küçük olduğu (268 satır) için küçük bir şans farkı normal.
+
+"Eğitim R²", çapraz doğrulamanın her turunda modelin kendi eğitim kısmında aldığı puanın ortalamasıdır.
+
+Ayar yapmadan önce RandomForest'ın eğitim-CV farkı yaklaşık 0,12, XGBoost'un yaklaşık 0,20 çıkmıştı; yani ikisi eğitim verisini ezberliyordu. Ayardan sonra bu fark 0,02-0,03'e düştü.
 
 ## Sonuçlar
 
