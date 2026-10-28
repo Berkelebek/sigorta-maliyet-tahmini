@@ -1,4 +1,4 @@
-![](sigorta-proje.png)
+![](sigorta-proje.PNG)
 
 # Sigorta Maliyet Tahmini
 
