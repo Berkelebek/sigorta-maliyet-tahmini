@@ -1,5 +1,5 @@
 ![](sigorta.PNG)
-
+Canlı demo: https://...onrender.com
 # Sigorta Maliyet Tahmini
 
 Bir kişinin yaşı, BMI değeri, sigara içip içmediği gibi bilgilerinden yıllık sağlık sigortası masrafını tahmin eden bir makine öğrenmesi projesi. Modeli eğitmekle kalmadım: sonuçların güvenilir olması için veri sızıntısını ve overfitting'i engellemeye çalıştım, seçtiğim modeli FastAPI ile bir API'ye ve basit bir web sayfasına çevirdim, hepsini de Docker ile paketledim.
